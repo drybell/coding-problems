@@ -1,5 +1,7 @@
 # Coding Problems
 
+Every other day, I wish to solve another coding problem and push it to this git repo. I will start out by doing a couple problems in most C-based languages, then branch out into some higher level languages (chosen randomly). 
+
 ## Problem Statements
 
 ### Problem 1 (Project Euler) (Coding Language: C) : 
