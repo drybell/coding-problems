@@ -10,3 +10,5 @@ Every other day, I wish to solve another coding problem and push it to this git 
     The sum of these multiples  is 23.
 
     Find the sum of all the multiples of 3 or 5 below 1000.
+
+&nbsp;&nbsp;### Problem 1 Answer: 233168
