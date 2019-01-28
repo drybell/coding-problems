@@ -25,6 +25,11 @@
 //way to code up. I had thoughts of recursion as well but I haven't thought 
 //of a more efficient solution as "total" increases
 
+//POST CODING DISCUSSION:
+//After taking a look at one of the solutions posted online, I saw that people
+//broke down the problem into summations of 3, 5, and 15. For a mathematical
+//approach, this is more suitable to actually solve the problem given. 
+
 #import <stdio.h>
 
 int multiple_3_5(int total)
