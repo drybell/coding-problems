@@ -25,3 +25,4 @@ Every other day, I wish to solve another coding problem and push it to this git 
 
 ### Problem 2 Answer: 4613732
 
+### Restarted May 6th, 2020 with Daily Coding Problems, will attempt Computer Language Benchmark Game and Project Euler
