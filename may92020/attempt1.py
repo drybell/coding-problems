@@ -36,6 +36,9 @@ def main():
 	print(multiplyExceptI([1,2,3,4,5]))
 	print("Input =     [1,2,3] Output = ", end="")
 	print(multiplyExceptI([3,2,1]))
+	print(multiplyExceptI([1,2]))
+	print(multiplyExceptI([]))
+	print(multiplyExceptI([1]))
 
 if __name__ == '__main__':
 	main()
