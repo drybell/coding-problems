@@ -26,7 +26,7 @@ def eucldist(A, B):
 	return sqrt((abs(A[0] - B[0]))**2 + (abs(A[1] - B[1]))**2)
 
 def norm(A): 
-	return sqrt(A[0]**2 + A[1]**2)
+	return sqrt((A[0]**2) + (A[1]**2))
 
 def vecBetweenPoints(B,A):
 	return [B[0] - A[0], B[1] - A[1]]
@@ -46,10 +46,8 @@ def angleBetweenVec(A, B):
 def simpleCCD(num_joints, target_point, L, iterations):
 	# starting end-first 
 	joint_ends = [[L*i,0] for i in range(1, num_joints + 1)][::-1]
-
 	ctr = 0
 	while ctr < iterations and eucldist(joint_ends[0], target_point) > 1: 
-
 		for i in range(len(joint_ends)):
 			p_e = joint_ends[i]
 			print("CURR JOINT END: %s" % (p_e))
@@ -58,8 +56,10 @@ def simpleCCD(num_joints, target_point, L, iterations):
 			else: 
 				next_joint = joint_ends[i + 1]
 			print("NEXT JOINT END: %s" % (next_joint))
-			p_c = vecBetweenPoints(p_e, next_joint)
+			p_c = vecBetweenPoints(joint_ends[0], next_joint)
 			p_t = vecBetweenPoints(target_point, next_joint)
+			print("P_C = %s" % (p_c))
+			print("P_T = %s" % (p_t))
 			theta = angleBetweenVec(p_c, p_t)
 			print("ANGLE OF ROTATION: %s degrees" % (theta * 180/pi))
 			# RECURSE DOWN BASE ON CURRENT POSITION IN ARRAY TO UPDATE POSITIONS OF HIGHER JOINTS
@@ -75,21 +75,21 @@ def simpleCCD(num_joints, target_point, L, iterations):
 			for j in range(len(joints_to_update)):
 				print("i: %s j: %s" % (i,j))
 				joint = joints_to_update[j]
-				print("UPDATED JOINT END: %s" % (p_e))
-				print("JOINT TO ROTATE BY: %s" % (joint_ends[i]))
-				x_prime = ((joint[0] - joint_ends[i][0] ) * cos(theta)) - ((joint[1] - joint_ends[i][1])* sin(theta)) 
-				y_prime = ((joint[0] - joint_ends[i][0] ) * sin(theta)) - ((joint[1] - joint_ends[i][1])* cos(theta))
-				joint_ends[j] = [x_prime, y_prime]
+				x_prime = ((joint[0] - joint_ends[i][0] ) * cos(theta)) - ((joint[1] - joint_ends[i][1]) * sin(theta)) 
+				y_prime = ((joint[0] - joint_ends[i][0] ) * sin(theta)) + ((joint[1] - joint_ends[i][1]) * cos(theta))
+				joint_ends[j] = [joint_ends[i][0] + x_prime, joint_ends[i][1] + y_prime]
 			# for 0th position, rotate based on 1st 
 			# for 1st position and 0th, rotate based on 2nd 
 
-			print("NEW JOINT POSITION: %s" % (joint_ends[i]))
+			print("LENGTHS: %s" % ([norm(sub) for sub in joint_ends]))
 			test_joint = joint_ends[::-1]
+			test_joint.insert(0,[0,0])
 			xs = [sub[0] for sub in test_joint]
 			ys = [sub[1] for sub in test_joint]
-			xs.insert(0, 0)
-			ys.insert(0,0)
-			plt.scatter(xs,ys)
+			plt.scatter([0, target_point[0]], [0,target_point[1]], c="red")
+			plt.scatter(xs,ys, c="blue")
+			plt.ylim(-15,15)
+			plt.xlim(-15,15)
 			plt.plot(xs,ys)
 			plt.show()
 		ctr += 1
